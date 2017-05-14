@@ -1,4 +1,4 @@
-#zigzag-conversion
+# zigzag-conversion
 ---
 
 题目描述
@@ -20,8 +20,27 @@ convert("PAYPALISHIRING", 3)should return"PAHNAPLSIIGYIR".
 
 ```
 
-题目大意
-
-```
-
+```java
+  public static String zigzag(String input, int size) {
+    String output = "";
+    int length = input.length();
+    if (1 == size) {
+      output = input;
+    } else {
+      for (int i = 0; i < size; i++) {
+        int delta = (size - i - 1) * 2;
+        int deltaReverse = (size - 1) * 2 - delta;
+        deltaReverse = (0 == deltaReverse ? (size - 1) * 2 : deltaReverse);
+        boolean flag = false;
+        for (int j = i; j < length; j += (flag ? delta : deltaReverse)) {
+          output += input.substring(j, j + 1);
+          if (0 == i || size - 1 == i) {
+          } else {
+            flag = !flag;
+          }
+        }
+      }
+    }
+    return output;
+  }
 ```
